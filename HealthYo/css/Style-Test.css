@@ -1,0 +1,152 @@
+.centrer-container {
+  text-align: center;
+}
+
+.centrer {
+  display: inline-block;
+}
+
+td{
+  border: none;
+}
+
+#d_liste{
+  font-size: 20px;
+  width: 90%;
+}
+
+.buttonplus {
+  border: 0px;
+  color: green;
+  text-decoration: 0px;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+  background-color: white;
+}
+
+.buttonmoins {
+  font-weight: bold;
+  border: none;
+  color: red;
+  text-decoration: none;
+  display: inline-block;
+  font-size:17px;
+  background-color: white;
+}
+
+.buttontrash {
+  font-weight: bold;
+  border: none;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  background-color: white;
+}
+
+.buttoninfo {
+  font-weight: bold;
+  border: none;
+  color: blue;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  background-color: white;
+}
+
+.buttonhelp {
+  font-weight: bold;
+  color: blue;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  background-color: white;
+}
+
+
+
+
+#d_affichage_q{
+  width: 100%;
+  font-size: 13px;
+  text-align: center;
+  color: white;
+  height: 100%;
+  font-weight: bold;
+  text-align: center;
+  background-color: #2ecc71;
+
+}
+
+
+#objectifcalorie{
+  width: auto;
+  font-size: 13px;
+  color: white;
+  background-color: #2ecc71;
+  font-weight: bold;
+  text-align: right;
+}
+
+#objectifgras{
+  width: auto;
+  font-size: 13px;
+  color: white;
+  background-color: #2ecc71;
+  font-weight: bold;
+  text-align: right;
+}
+
+#objectifglucide{
+  width: auto;
+  font-size: 13px;
+  color: white;
+  background-color: #2ecc71;
+  font-weight: bold;
+  text-align: right;
+}
+
+#objectifsucre{
+  width: auto;
+  font-size: 13px;
+  color: white;
+  background-color: #2ecc71;
+  font-weight: bold;
+  text-align: right;
+}
+
+#objectiffibre{
+  width: auto;
+  font-size: 13px;
+  color: white;
+  background-color: #2ecc71;
+  font-weight: bold;
+  text-align: right;
+}
+
+#objectifprot{
+  width: auto;
+  font-size: 13px;
+  color: white;
+  background-color: #2ecc71;
+  font-weight: bold;
+  text-align: right;
+}
+
+#objectifsel{
+  width: auto;
+  font-size: 13px;
+  color: white;
+  background-color: #2ecc71;
+  font-weight: bold;
+  text-align: right;
+}
+
+#news{
+   padding: 5% 10% 10% 5%;
+}
+
+ons-card{
+  width: 100%;
+}

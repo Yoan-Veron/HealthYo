@@ -1,0 +1,330 @@
+<html>
+<head>
+
+  <title>HealthYo</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/onsenui.css">
+  <link rel="stylesheet" href="css/onsen-css-components.min.css">
+  <link rel="stylesheet" href="css/Style-Test.css">
+  <script src="js/onsenui.min.js"></script>
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/Script-Test.js"> </script>
+  <script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
+
+</head>
+
+<ons-splitter>
+  <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+    <ons-page>
+      <ons-list>
+        <ons-list-item onclick="fn.load('switch.html')" tappable>
+          <i class="fas fa-home"></i>  &nbsp; &nbsp; Accueil
+        </ons-list-item>
+        <ons-list-item onclick="fn.load('info.html')" tappable>
+          <i class="fas fa-utensils"></i>  &nbsp; &nbsp; Infos nutritions
+        </ons-list-item>
+        <ons-list-item onclick="fn.load('about.html')" tappable>
+        <i class="fas fa-info-circle"></i> &nbsp; &nbsp;  About us
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </ons-splitter-side>
+  <ons-splitter-content id="content" page="switch.html"></ons-splitter-content>
+</ons-splitter>
+
+
+<ons-popover direction="up" id="popover">
+  <div style="padding: 10px; text-align: center;">
+    <p>
+      On plaisante, vous ne nous int&eacute;ressez pas.
+    </p>
+    <p>
+      <ons-button onclick="hidePopover()">Close</ons-button>
+    </p>
+  </div>
+</ons-popover>
+
+<template id="alert-dialog.html">
+  <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+    <div class="alert-dialog-content">
+      Voulez-vous vraiment supprimer cet aliment ?
+    </div>
+    <div class="alert-dialog-footer">
+    	<ons-alert-dialog-button onclick="AlertDialogdelete()">Oui</ons-alert-dialog-button>
+      	<ons-alert-dialog-button onclick="hideDialog('my-alert-dialog')">Non</ons-alert-dialog-button>
+    </div>
+  </ons-alert-dialog>
+</template>
+
+<template id="alert-dialogimc.html">
+  <ons-page id="imc">
+    <div class="alert-dialog-title"><i class="fas fa-calculator" style="color:blue; margin-top: 30%;"></i> Calcul de l'IMC</div>
+    <div class="alert-dialog-content">
+      <table style="text-align: center; margin-left: auto; margin-right: auto; ">
+          <tr> <td> <input id= masse style="text-align:center;" class="text-input text-input--material" placeholder="Masse en Kg" type="number" min="0" required> </td> </tr>
+          <tr> <td> <input id= taille style="text-align:center;" class="text-input text-input--material" placeholder="Taille en M&egrave;tre" type="number" min="0" required> </td> </tr>
+          <tr> <td> <br> </td></tr>
+          <tr> <td> <ons-button id="calculimc">Calcul</ons-button> </td>
+          <tr>  <td>    <br>  </td> </tr>
+          <tr style="text-align: center; font-size: 20px;"> <td>Votre Imc est de &nbsp <span id="resultimc" style="text-align: right;">0</span></td>
+          </tr>
+          <tr><td><span id="imcpoid"></span></td></tr>
+      </table>
+    </div>
+  </ons-page>
+</template>
+
+<template id="aliment.html">
+  <ons-page id="aliment">
+    <ons-toolbar style="background-color:#2ecc71;">
+      <div  class="left" style="color:white; font-size: 20px; padding-left:2%; ">
+      <b>&nbsp; <i class="fas fa-heartbeat" onclick="fn.open()"></i> &nbsp; HealthYo</b>
+      </div>
+    </ons-toolbar>
+      <ons-scroller style="height:  1000%; width: 100%">
+
+        <div class="centrer-container" style="height:1000%; background-color:white;">
+        <div style="padding-top: 1px">  <ons-search-input id=Search placeholder="Search"></ons-search-input></div>
+        <p style="text-align: right;"><ons-fab modifier="mini" id="newitem" style="background-color: orange; color: white; margin-right:5%; margin-top:1%;"><ons-icon icon="md-plus"></ons-icon></ons-fab></p>
+
+    <div  id="d_liste" class="centrer" style="margin-top:5%;"></div>
+
+  </div>
+    </ons-scroller>
+    </div>
+  </ons-page>
+</template>
+
+<template id="accueil.html">
+  <ons-page id="accueil">
+    <ons-toolbar style="background-color:#2ecc71;">
+      <div  class="left" style="color:white; font-size: 20px; padding-left:2%; ">
+      <b>&nbsp; <i class="fas fa-heartbeat" onclick="fn.open()"></i> &nbsp; HealthYo</b>
+      </div>
+    </ons-toolbar>
+<div class="centrer-container" style="height:100%; background-color:white;">
+
+   <img src="Leaf.png" height="55%"/></div>
+
+  <ons-bottom-toolbar style="height: auto; ">
+		<table border=1 id="d_affichage_q" >
+			<tr>
+					<td>Nutriments</td><td>Consommations</td><td>Restes</td><td>Objectifs</td>
+			</tr>
+      <tr>
+          <td>Calories</td> <td><span id="caloriemange">0</span>kcal</td> <td><span id = "restecalorie">0</span>kcal</td> <td><select id="objectifcalorie" class="select-input"></select></td>
+      </tr>
+      <tr>
+          <td>Mati&egrave;res grasses</td> <td><span id="grasmange">0</span>g</td> <td><span id = "restegras">0</span>g</td> <td><select id="objectifgras" class="select-input"></select></td>
+      </tr>
+      <tr>
+          <td>Glucides</td> <td><span id="glucidemange">0</span>g</td> <td><span id = "resteglucide">0</span>g</td> <td><select id="objectifglucide" class="select-input"></select></td>
+      </tr>
+			<tr>
+					<td>Sucres</td> <td><span id="sucremange">0</span>g</td> <td><span id = "restesucre">0</span>g</td> <td><select id="objectifsucre" class="select-input"></select></td>
+			</tr>
+      <tr>
+          <td>Fibres</td> <td><span id="fibremange">0</span>g</td> <td><span id = "restefibre">0</span>g</td> <td><select id="objectiffibre" class="select-input"></select></td>
+      </tr>
+      <tr>
+          <td>Prot&eacute;ines</td> <td><span id="protmange">0</span>g</td> <td><span id = "resteprot">0</span>g</td> <td><select id="objectifprot" class="select-input"></select></td>
+      </tr>
+			<tr>
+        <td>Sel</td> <td><span id="selmange">0</span>g</td> <td><span id = "restesel">0</span>g</td> <td><select id="objectifsel" class="select-input"></select></td>
+			</tr>
+		</table>
+</ons-bottom-toolbar>
+
+  </ons-page>
+</template>
+
+
+<template id="switch.html">
+  <ons-page>
+    <ons-tabbar swipeable position="bottom" id="switch">
+    <ons-tab page="accueil.html" icon="ion-ios-home, material:md-home" active>
+    </ons-tab>
+    <ons-tab page="aliment.html"><i class="fas fa-leaf"></i>
+    </ons-tab>
+    <ons-tab page="alert-dialogimc.html"><i class="fas fa-calculator"></i>
+    </ons-tab>
+  </ons-tabbar>
+  </ons-page>
+</template>
+
+<template id="info.html">
+  <ons-page>
+    <ons-toolbar style="background-color:#2ecc71;">
+      <div  class="left" style="color:white; font-size: 20px; padding-left:2%; ">
+      <b>&nbsp; <i class="fas fa-utensils" onclick="fn.open()"></i> &nbsp; Infos nutritions</b>
+      </div>
+    </ons-toolbar>
+
+    <p style="text-align: left; padding-left: 10px; padding-right: 10px;">
+      <b style="color: blue;">
+  Tableau recapitulatif</b> :
+  <br><br><b style="color: blue;">Nutriments </b> : Vous pouvez voir les nutriments propos&eacute;s par l'application.
+  <br><b style="color: blue;">Consommations </b> : Quantit&eacute;s de nutriments que vous avez mang&eacute;s.
+  <br><b style="color: blue;">Reste </b> : Quantit&eacute;s de nutriments qu'il vous reste &agrave; manger. <object style="color: red;">Ou &eacute;x&eacute;dent consomm&eacute;.</object>
+  <br><b style="color: blue;">Objectif </b> : Ce sont vos apports journaliers dont vous pouvez en modifier la quantit&eacute; avec prudence en consultant un professionnel de sant&eacute;.
+  <b style="color: blue;">
+<br><br>Nutriments</b> :
+
+    <br><br><b style="color: blue;"> Calories </b> : il est conseill&eacute; de prendre :
+    <br><br> -Pour un homme 2600 kcal/jour
+        <br> -Pour une femme 2100 kcal/jour
+    <br><br><b style="color: blue;">Mati&egrave;res grasses</b> : Les lipides ne devraient pas repr&eacute;senter plus de 30 % des apports caloriques de notre alimentation quotidienne.
+    <br><br><b style="color: blue;">Glucides</b> : Les aliments glucidiques sont ceux qui contiennent des quantit&eacute;s importantes de sucres : pain, pâtes, fruits, miel, aliments sucr&eacute;s etc... Les recommandations officielles privil&eacute;gient la part des glucides puisque, selon les pays, ceux-ci doivent couvrir 50 &agrave; 60 % des besoins en &eacute;nergie (50 &agrave; 55% en France).
+    Si on ne fait pas beaucoup d'exercice, ces recommandations assez &eacute;lev&eacute;es peuvent conduire &agrave; consommer une charge glyc&eacute;mique excessive.
+    <br><br><b style="color: blue;">Sucres</b> : Dans un r&eacute;gime &eacute;quilibr&eacute; il peut repr&eacute;senter jusqu'&agrave; 5 % des apports &eacute;nerg&eacute;tiques quotidiens, c'est-&agrave;-dire, l'&eacute;quivalent de 25 grammes par jour, soit six cuill&egrave;res &agrave; caf&eacute; pour un r&eacute;gime de 2000 calories.
+    <br><br><b style="color: blue;">Fibres</b> : Pour un individu normalement constitu&eacute;, il est recomand&eacute; de manger l'&eacute;quivalent de 25g de fibres par jour. Cependant il n'existe pas d'apport maximal officiel en fibres.
+		<br><br>Prot&eacute;ines</b> : Pour choisir la portion de prot&eacute;ine &agrave; ing&eacute;rer par jour, il faut choisir son r&eacute;gime.
+		<br>Pour un r&eacute;gime classique : On peut manger en gramme l'&eacute;quivalent de sa massse(en Kg) sois 70g de prot&eacute;ines pour une personne de 70Kg.
+		<br>Pour un r&eacute;gime de prise de masse musculaire on peut multiplier jusqu'&agrave; 1,3 sa masse(en Kg), soit jusqu&#039;&agrave; 91g de prot&eacute;ines pour une personne de 70Kg.
+<br><br><b style="color: blue;">Sel</b> : Pour un individu normalement constitu&eacute;, la consommation de sel ne doit pas d&eacute;passer les 4g par jour.
+<br><br><b style="color: blue;">IMC</b> : L&#039;indice de masse corporelle (IMC) est le seul indice valid&eacute; par l&#039;Organisation mondiale de la sant&eacute;
+pour &eacute;valuer la corpulence d&#039;un individu et donc les &eacute;ventuels risques pour la sant&eacute;.
+L&#039;IMC permet de d&eacute;terminer si l&#039;on est situation de maigreur, de surpoids ou d&#039;ob&eacute;sit&eacute; par exemple.
+<br>Une personne est consid&eacute;r&eacute;e m&eacute;dicalement maigre lorsque son Imc atteint 18.5.
+<br>Une personne est consid&eacute;r&eacute;e m&eacute;dicalement en situation de surpoids lorsque son Imc atteint 25.
+<br>Une personne est consid&eacute;r&eacute;e m&eacute;dicalement en situation d&#039;ob&eacute;sit&eacute; lorsque son Imc atteint 30.
+
+			</p>
+  </ons-page>
+</template>
+
+<template id="about.html">
+  <ons-page>
+    <ons-toolbar style="background-color:#2ecc71;">
+      <div  class="left" style="color:white; font-size: 20px; padding-left:2%; ">
+      <b>&nbsp; <i class="fas fa-heartbeat" onclick="fn.open()"></i> &nbsp; HealthYo</b>
+      </div>
+    </ons-toolbar>
+
+    <div class="center" style="color:grey; text-align: left; ">
+     <p style="padding-left: 10px; padding-right: 10px; padding-top: 5%;">Cr&eacute;&eacute;e sur une initiative de <a style="color: blue;" href="https://appsyo.wixsite.com/monsite/about">Yoan V&eacute;ron</a>
+       avec l'aide de <a style="color: blue;" href="http://veron.univ-tln.fr/">Pascal V&eacute;ron</a>.
+      <br>HealthYo est une application qui permet &agrave; son utilisateur d'avoir acc&eacute;s &agrave; un suivi de sa consommation;
+       de calories, de mati&egrave;res grasses, de glucide, de fibres, de sucres, de prot&eacute;ines et de sel sur une journ&eacute;e.
+      Les informations communiqu&eacute;es par l'application dans le domaine de la sant&eacute; comme l'IMC (indice de masse corporel) ou les conseils de nutritions,
+      proviennent du site internet de <a style="color: blue;" href="https://www.who.int/topics/nutrition/fr/"> l'OMS </a> et de conseils de nutritionnistes.
+      <br><br>Notez que HealthYo n'est destin&eacute;e &agrave; &ecirc;tre utilis&eacute;e que pour aider &agrave; tenir compte des consommations de l'utilisateur,
+      et n'a pas pour vocation le diagnostique de maladies ou d'infections, ni de soigner, contr&ocirc;ler, traiter ou pr&eacute;venir les maladies.
+      <br><br>Les informations communiqu&eacute;es ne sont l&agrave; que pour renseigner l'utilisateur et ne suffisent en aucun cas &agrave; remplacer les conseils d'un professionnel de sant&eacute;.
+      L'application ne communique aucune des donn&eacute;es saisies sur le r&eacute;seau, toutes vos informations restent confidentielles.
+      <br><br> Vous pouvez nous contacter &agrave; l'adresse mail suivante : <a style="color: blue;" href="mailto:appsyo@sacuotfos.fr"> appsyo&#64;sacuotfos.fr </a>
+    </p></div>
+
+    <ons-bottom-toolbar style="background-color: #2ecc71; font-size:15px; text-align: right; color:white; padding-right: 1%; height:10%">
+      <p><i class="fas fa-heartbeat"></i> HealthYo&reg;
+      <br>&#169;2020 by Yoan V&eacute;ron</p>
+    </ons-bottom-toolbar>
+  </ons-page>
+</template>
+
+<template id="alert-dialogajoue.html">
+  <ons-alert-dialog id="my-alert-dialogajoue" modifier="rowfooter">
+    <div class="alert-dialog-title">  Ajouter un aliment</div>
+    <div class="alert-dialog-content">
+
+      <div class="centrer">
+      <table id="table1" style="text-align: center; margin-left: auto; margin-right: auto;">
+      <tr><td>Aliment</td><td><input id=aliments class="text-input text-input--material" type="text" placeholder="nom"></td>
+      </tr>
+      <tr><td>Quantit&eacute;e</td><td><input id= quantite class="text-input text-input--material" type="number" placeholder="g"></td>
+      </tr>
+      <tr><td>Calories </td><td><input id=dosecalorie class="text-input text-input--material" type="number" min="0" placeholder="kcal/100g" ></td>
+      </tr>
+      <tr><td>Mati&egrave;res grasses </td><td><input id=dosemg  class="text-input text-input--material" type="number" min="0" placeholder="g/100g" ></td>
+      </tr>
+      <tr><td>Glucides </td><td><input id=doseglucide  class="text-input text-input--material" type="number" min="0" placeholder="g/100g" ></td>
+      </tr>
+      <tr><td>Sucres </td><td><input id=dosesucre  class="text-input text-input--material" type="number" min="0" placeholder="g/100g" ></td>
+      </tr>
+      <tr><td>Fibres </td><td><input id=dosefibre class="text-input text-input--material" type="number" min="0" placeholder="g/100g" ></td>
+      </tr>
+      <tr><td>Prot&eacute;ines </td><td><input id=doseprot class="text-input text-input--material" type="number" min="0" placeholder="g/100g" ></td>
+      </tr>
+      <tr><td>Sel </td><td><input id=dosesel class="text-input text-input--material" type="number" min="0" placeholder="g/100g" ></td>
+      </tr>
+
+
+    </table></div>
+
+    </div>
+    <div class="alert-dialog-footer">
+      <ons-alert-dialog-button onclick="AlertDialogajouter()">Ajouter</ons-alert-dialog-button>
+      <ons-alert-dialog-button onclick="hideDialog('my-alert-dialogajoue')">Retour</ons-alert-dialog-button>
+    </div>
+
+  </ons-alert-dialog>
+</template>
+
+<template id="alert-dialoginfo.html">
+  <ons-alert-dialog id="my-alert-dialoginfo" modifier="rowfooter">
+    <div class="alert-dialog-title"> <i class="fas fa-utensils"></i> <span id="infoaliment"></span> </div>
+    <div class="alert-dialog-content">
+
+      <div class="centrer">
+      <table id="table2" style="text-align: center; margin-left: auto; margin-right: auto;">
+      <tr><td>Calories </td><td><input id=dosecalorieinfo class="text-input text-input--material"  style="text-align: center;"type="text"  readonly></input></td>
+      </tr>
+      <tr><td>Mati&egrave;res grasses </td><td><input id=dosegrasinfo class="text-input text-input--material"  style="text-align: center;"type="text"  readonly></input></td>
+      </tr>
+      <tr><td>Glucides</td><td><input id=doseglucideinfo class="text-input text-input--material"  style="text-align: center;"type="text"  readonly></input></td>
+      </tr>
+      <tr><td>Sucres </td><td><input id=dosesucreinfo  class="text-input text-input--material" style="text-align: center;" type="text"  readonly></input></td>
+      </tr>
+      <tr><td>Fibres </td><td><input id=dosefibreinfo class="text-input text-input--material" style="text-align: center;" type="text"  readonly></input></td>
+      </tr>
+      <tr><td>Prot&eacute;ines </td><td><input  id=doseprotinfo class="text-input text-input--material" style="text-align: center;" type="text"  readonly></input> </td>
+      </tr>
+      <tr><td>Sel </td><td><input id=doseselinfo class="text-input text-input--material" style="text-align: center;" type="text"  readonly></input></td>
+      </tr>
+      </table></div>
+
+    </div>
+    <div class="alert-dialog-footer">
+      <ons-alert-dialog-button onclick="hideDialog('my-alert-dialoginfo')">Annuler</ons-alert-dialog-button>
+      <ons-alert-dialog-button onclick="CreateAlertDialog(8)">Modifier</ons-alert-dialog-button>
+    </div>
+
+  </ons-alert-dialog>
+</template>
+
+<template id="alert-dialogedit.html">
+  <ons-alert-dialog id="my-alert-dialogedit" modifier="rowfooter">
+    <div class="alert-dialog-title"> <i class="fas fa-utensils"></i> <span id="editaliment"></span> </div>
+    <div class="alert-dialog-content">
+
+      <div class="centrer">
+      <table id="table2" style="text-align: center; margin-left: auto; margin-right: auto;">
+      <tr><td>Calories </td><td><input id=dosecalorieedit class="text-input text-input--material" style="text-align: center;" type="number" min="0"  ></input></td>
+      </tr>
+      <tr><td>Mati&egrave;res grasses</td><td><input id=dosegrasedit class="text-input text-input--material" style="text-align: center;" type="number" min="0"  ></input></td>
+      </tr>
+      <tr><td>Glucides </td><td><input id=doseglucideedit class="text-input text-input--material" style="text-align: center;" type="number" min="0"  ></input></td>
+      </tr>
+      <tr><td>Sucres </td><td><input id=dosesucreedit  class="text-input text-input--material" style="text-align: center;" type="number" min="0"  ></input></td>
+      </tr>
+      <tr><td>Fibres </td><td><input id=dosefibreedit class="text-input text-input--material" style="text-align: center;" type="number" min="0"  ></input></td>
+      </tr>
+      <tr><td>Prot&eacute;ines </td><td><input  id=doseprotedit class="text-input text-input--material" style="text-align: center;" type="number" min="0"  ></input> </td>
+      </tr>
+      <tr><td>Sel </td><td><input id=doseseledit class="text-input text-input--material" style="text-align: center;" type="number" min="0"  ></input></td>
+      </tr>
+
+
+      </table></div>
+
+    </div>
+    <div class="alert-dialog-footer">
+      <ons-alert-dialog-button onclick="AlertDialogedit()">Sauvegarder</ons-alert-dialog-button>
+      <ons-alert-dialog-button onclick="AlertDialogbtwo()">Annuler</ons-alert-dialog-button>
+    </div>
+
+  </ons-alert-dialog>
+</template>
+
+
+</html>
